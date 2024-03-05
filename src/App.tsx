@@ -33,12 +33,8 @@ function App() {
           return app.name.match(new RegExp(searchTerm(), "gi"));
         })
         .sort((a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
+          if (a.name < b.name) return -1;
+          if (a.name > b.name) return 1;
           return 0;
         }),
     );
@@ -52,6 +48,7 @@ function App() {
         value={searchTerm()}
         onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
       />
+
       <div class="flex flex-col overflow-y-auto">
         <For each={shownApps()}>{(app) => <p>{app.name}</p>}</For>
       </div>
