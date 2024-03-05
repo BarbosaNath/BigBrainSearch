@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api";
 import { For, createEffect, createSignal, onMount } from "solid-js";
-import { AppType } from "./components/Application";
+import Application, { AppType } from "./components/Application";
 
 function App() {
   const [searchTerm, setSearchTerm] = createSignal("");
@@ -44,7 +44,7 @@ function App() {
       />
 
       <div class="flex flex-col overflow-y-auto">
-        <For each={shownApps()}>{(app) => <p>{app.name}</p>}</For>
+        <For each={shownApps()}>{(app) => <Application appData={app} />}</For>
       </div>
     </div>
   );
