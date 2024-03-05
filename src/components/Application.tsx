@@ -21,7 +21,10 @@ export default function Application({ appData }: { appData: AppType }) {
 
   return (
     <button class="flex items-center gap-2">
-      <Show when={imagePath() !== "asset://localhost/null"}>
+      <Show
+        when={imagePath() !== "asset://localhost/null"}
+        fallback={<div class="size-8" />}
+      >
         <img class="size-8" src={imagePath() || ""} />
       </Show>
 
