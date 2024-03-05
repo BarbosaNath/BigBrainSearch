@@ -33,9 +33,25 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
+#[tauri::command]
+fn get_apps() -> Vec<App> {
+    let raw_apps = applications::get_apps();
+    let mut treated_apps:Vec<App> = Vec::new();
+    for raw_app in raw_apps {
+        let treated_app = App { 
+            name: raw_app.name,
+            icon_path: raw_app.icon_path,
+            app_path_exe: raw_app.app_path_exe,
+            app_desktop_path: raw_app.app_desktop_path};
+        treated_apps.push(treated_app);       
+    }
+    treated_apps
+}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![get_apps])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
