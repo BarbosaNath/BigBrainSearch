@@ -35,7 +35,7 @@ function App() {
   });
 
   return (
-    <div class="flex flex-col justify-center bg-neutral-100 p-2 dark:bg-neutral-900">
+    <div class="flex flex-col justify-center gap-2 bg-neutral-100 p-2 dark:bg-neutral-900">
       <input
         class="h-fit w-full rounded-lg px-5 py-4 text-lg text-neutral-950 shadow shadow-neutral-300 dark:bg-neutral-800 dark:text-neutral-100 dark:shadow-neutral-950"
         placeholder="BigBrainSearch"
