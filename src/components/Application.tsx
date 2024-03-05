@@ -1,4 +1,5 @@
-import { Show } from "solid-js";
+import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { Show, createSignal, onMount } from "solid-js";
 
 export interface AppType {
   name: string;
@@ -8,8 +9,22 @@ export interface AppType {
 }
 
 export default function Application({ appData }: { appData: AppType }) {
+  const [imagePath, setImagePath] = createSignal<string | null>(null);
+
+  async function updatePaths() {
+    setImagePath(convertFileSrc(appData.icon_path));
+  }
+
+  onMount(() => {
+    updatePaths();
+  });
+
   return (
-    <button class="flex gap-2">
+    <button class="flex items-center gap-2">
+      <Show when={imagePath() !== "asset://localhost/null"}>
+        <img class="size-8" src={imagePath() || ""} />
+      </Show>
+
       <div class="text-start">
         <div>{appData.name}</div>
         <Show
