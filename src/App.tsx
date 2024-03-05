@@ -1,12 +1,6 @@
 import { invoke } from "@tauri-apps/api";
 import { For, createEffect, createSignal, onMount } from "solid-js";
-
-interface AppType {
-  name: string;
-  icon_path: string;
-  app_path_exe: string;
-  app_desktop_path: string;
-}
+import { AppType } from "./components/Application";
 
 function App() {
   const [searchTerm, setSearchTerm] = createSignal("");
