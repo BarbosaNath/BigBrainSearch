@@ -15,6 +15,13 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": ["**/**", "**/.*/**"]
+      },
+      "path": {
+        "all": true
       }
     },
     "windows": [
