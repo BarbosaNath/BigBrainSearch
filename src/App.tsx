@@ -1,4 +1,5 @@
-import { createSignal } from "solid-js";
+import { invoke } from "@tauri-apps/api";
+import { For, createSignal, onMount } from "solid-js";
 
 interface AppType {
   name: string;
@@ -9,6 +10,15 @@ interface AppType {
 
 function App() {
   const [searchTerm, setSearchTerm] = createSignal("");
+  const [apps, setApps] = createSignal<AppType[]>();
+
+  onMount(() => {
+    async function get_apps() {
+      const apps = await invoke("get_apps");
+      setApps(apps as AppType[]);
+    }
+    get_apps();
+  });
 
   return (
     <div class="flex h-screen justify-center bg-neutral-100 p-2 dark:bg-neutral-900">
@@ -18,6 +28,9 @@ function App() {
         value={searchTerm()}
         onChange={(e) => setSearchTerm(e.currentTarget.value)}
       />
+      <div class="flex flex-col overflow-y-auto">
+        <For each={apps()}>{(app) => <p>{app.name}</p>}</For>
+      </div>
     </div>
   );
 }
