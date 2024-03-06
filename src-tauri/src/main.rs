@@ -4,6 +4,7 @@
 use applications;
 use std::path::PathBuf;
 use serde::ser::{Serialize, SerializeStruct, Serializer};
+use tauri::Manager;
 
 pub struct App {
     pub name: String,
@@ -44,6 +45,15 @@ fn get_apps() -> Vec<App> {
 
 fn main() {
     tauri::Builder::default()
+        .setup(|app| {
+            let main_window = app.get_window("main").unwrap();
+            main_window.set_always_on_top(true).unwrap();
+            main_window.set_fullscreen(false).unwrap();
+            main_window.set_resizable(false).unwrap();
+            main_window.set_decorations(false).unwrap();
+
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![get_apps])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
