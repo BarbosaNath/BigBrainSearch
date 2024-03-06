@@ -2,6 +2,7 @@ import { invoke } from "@tauri-apps/api";
 import { createEffect, createSignal, onMount } from "solid-js";
 import { AppType } from "./components/Application";
 import ResultList from "./components/ResultList";
+import { LogicalSize, appWindow } from "@tauri-apps/api/window";
 
 function App() {
   const [searchTerm, setSearchTerm] = createSignal("");
@@ -33,6 +34,13 @@ function App() {
           return 0;
         }),
     );
+  });
+
+  createEffect(async () => {
+    if (searchTerm().length <= 0) {
+      await appWindow.setSize(new LogicalSize(600, 30));
+      await appWindow.center();
+    } else await appWindow.setSize(new LogicalSize(600, 600));
   });
 
   return (
