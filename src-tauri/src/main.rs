@@ -27,12 +27,6 @@ impl Serialize for App {
     }
 }
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
 #[tauri::command]
 fn get_apps() -> Vec<App> {
     let raw_apps = applications::get_apps();
@@ -50,7 +44,6 @@ fn get_apps() -> Vec<App> {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
         .invoke_handler(tauri::generate_handler![get_apps])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
