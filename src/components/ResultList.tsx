@@ -1,4 +1,4 @@
-import { Accessor, For } from "solid-js";
+import { Accessor, For, Show } from "solid-js";
 import Application, { AppType } from "./Application";
 
 export default function ResultList({
@@ -7,8 +7,12 @@ export default function ResultList({
   results: Accessor<AppType[]>;
 }) {
   return (
-    <div class="flex flex-col overflow-y-auto">
-      <For each={results()}>{(result) => <Application appData={result} />}</For>
-    </div>
+    <Show when={results().length > 0}>
+      <ul class="flex flex-col gap-2 overflow-y-auto rounded-lg bg-white px-5 py-4 text-neutral-950 shadow shadow-neutral-300 dark:bg-neutral-800 dark:text-neutral-100 dark:shadow-neutral-950">
+        <For each={results()}>
+          {(result) => <Application appData={result} />}
+        </For>
+      </ul>
+    </Show>
   );
 }
