@@ -1,11 +1,12 @@
 import { invoke } from "@tauri-apps/api";
-import { For, createEffect, createSignal, onMount } from "solid-js";
-import Application, { AppType } from "./components/Application";
+import { createEffect, createSignal, onMount } from "solid-js";
+import { AppType } from "./components/Application";
+import ResultList from "./components/ResultList";
 
 function App() {
   const [searchTerm, setSearchTerm] = createSignal("");
-  const [apps, setApps] = createSignal<AppType[]>();
-  const [shownApps, setShownApps] = createSignal<AppType[]>();
+  const [apps, setApps] = createSignal<AppType[]>([] as AppType[]);
+  const [shownApps, setShownApps] = createSignal<AppType[]>([] as AppType[]);
 
   onMount(() => {
     async function get_apps() {
@@ -43,9 +44,7 @@ function App() {
         onKeyUp={(e) => setSearchTerm(e.currentTarget.value)}
       />
 
-      <div class="flex flex-col overflow-y-auto">
-        <For each={shownApps()}>{(app) => <Application appData={app} />}</For>
-      </div>
+      <ResultList results={shownApps} />
     </div>
   );
 }
