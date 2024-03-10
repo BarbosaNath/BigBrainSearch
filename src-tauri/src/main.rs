@@ -40,6 +40,7 @@ fn get_apps() -> Vec<App> {
             app_desktop_path: raw_app.app_desktop_path};
         treated_apps.push(treated_app);       
     }
+    treated_apps.sort_by(|a, b| a.name.cmp(&b.name));
     treated_apps
 }
 

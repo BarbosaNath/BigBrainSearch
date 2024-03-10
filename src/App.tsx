@@ -24,15 +24,9 @@ function App() {
     }
 
     setShownApps(
-      apps()
-        ?.filter((app) => {
-          return app.name.match(new RegExp(searchTerm(), "gi"));
-        })
-        .sort((a, b) => {
-          if (a.name < b.name) return -1;
-          if (a.name > b.name) return 1;
-          return 0;
-        }),
+      apps()?.filter((app) => {
+        return app.name.match(new RegExp(searchTerm(), "gi"));
+      }),
     );
   });
 
