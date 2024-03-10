@@ -1,7 +1,8 @@
-# Tauri + Solid + Typescript
+# BigBrainSearch
+> BigBrainSearch is an open-source application launcher made with Tauri + Solid + Typescript.
+> This project was made with the intention of studying Rust, Tauri and SolidJS, there may be unexpected bugs. 
 
-This template should help get you started developing with Tauri, Solid and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+<!-- ## Usage -->
+<!-- ## Build from source -->
+## References
+Special thanks to [CerebroApp](https://github.com/cerebroapp/cerebro/tree/master) for inspiring me to make this project!
