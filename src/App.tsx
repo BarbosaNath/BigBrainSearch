@@ -31,10 +31,16 @@ function App() {
   });
 
   createEffect(async () => {
-    if (searchTerm().length <= 0) {
+    if (shownApps().length <= 2) {
       await appWindow.setSize(new LogicalSize(600, 30));
       await appWindow.center();
-    } else await appWindow.setSize(new LogicalSize(600, 600));
+    } else if (shownApps().length === 3) {
+      await appWindow.setSize(new LogicalSize(600, 250));
+      await appWindow.center();
+    } else {
+      await appWindow.setSize(new LogicalSize(600, 600));
+      await appWindow.center();
+    }
   });
 
   return (
